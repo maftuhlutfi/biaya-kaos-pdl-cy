@@ -81,6 +81,32 @@ function selectOption(nama, index) {
     displayDetail(index);
 }
 
+// Calculate price based on size and sleeve
+function calculatePrice(basePrice, size, lengan) {
+    let price = basePrice;
+
+    // Add for long sleeve (+10rb)
+    if (lengan && lengan.toLowerCase() === 'panjang') {
+        price += 10000;
+    }
+
+    // Add for size > XL
+    const sizeUpper = size ? size.toUpperCase() : '';
+    const xCount = (sizeUpper.match(/X/g) || []).length;
+
+    if (xCount > 1) {
+        // XXL = 2X = +5rb, XXXL = 3X = +10rb, etc.
+        price += (xCount - 1) * 5000;
+    }
+
+    return price;
+}
+
+// Format number to Rupiah
+function formatRupiah(number) {
+    return 'Rp' + number.toLocaleString('id-ID');
+}
+
 // Display detail when name is selected
 function displayDetail(index) {
     if (index === -1 || index === '') {
@@ -96,13 +122,61 @@ function displayDetail(index) {
     document.getElementById('status').textContent = peserta['Status'];
     document.getElementById('rt').textContent = peserta['RT'];
 
-    document.getElementById('sizeKaos').textContent = peserta['Size Kaos'];
-    document.getElementById('lenganKaos').textContent = peserta['Lengan Kaos'];
-    document.getElementById('biayaKaos').textContent = peserta['Biaya Kaos'];
+    // Calculate and display Kaos price
+    const baseKaosPrice = 65000; // Base price for short sleeve
+    const sizeKaos = peserta['Size Kaos'];
+    const lenganKaos = peserta['Lengan Kaos'];
+    const calculatedKaosPrice = calculatePrice(baseKaosPrice, sizeKaos, lenganKaos);
 
-    document.getElementById('sizePdl').textContent = peserta['Size PDL'];
-    document.getElementById('lenganPdl').textContent = peserta['Lengan PDL'];
-    document.getElementById('biayaPdl').textContent = peserta['Biaya PDL'];
+    document.getElementById('sizeKaos').textContent = sizeKaos;
+    document.getElementById('lenganKaos').textContent = lenganKaos;
+
+    // Create detailed breakdown for Kaos
+    let kaosBreakdown = `${formatRupiah(calculatedKaosPrice)}`;
+    let kaosDetails = [];
+
+    if (lenganKaos && lenganKaos.toLowerCase() === 'panjang') {
+        kaosDetails.push('Lengan panjang +10rb');
+    }
+
+    const kaosXCount = (sizeKaos.toUpperCase().match(/X/g) || []).length;
+    if (kaosXCount > 1) {
+        kaosDetails.push(`Size ${sizeKaos} +${(kaosXCount - 1) * 5}rb`);
+    }
+
+    if (kaosDetails.length > 0) {
+        kaosBreakdown += ` (${kaosDetails.join(', ')})`;
+    }
+
+    document.getElementById('biayaKaos').textContent = kaosBreakdown;
+
+    // Calculate and display PDL price
+    const basePdlPrice = 130000; // Base price for short sleeve
+    const sizePdl = peserta['Size PDL'];
+    const lenganPdl = peserta['Lengan PDL'];
+    const calculatedPdlPrice = calculatePrice(basePdlPrice, sizePdl, lenganPdl);
+
+    document.getElementById('sizePdl').textContent = sizePdl;
+    document.getElementById('lenganPdl').textContent = lenganPdl;
+
+    // Create detailed breakdown for PDL
+    let pdlBreakdown = `${formatRupiah(calculatedPdlPrice)}`;
+    let pdlDetails = [];
+
+    if (lenganPdl && lenganPdl.toLowerCase() === 'panjang') {
+        pdlDetails.push('Lengan panjang +10rb');
+    }
+
+    const pdlXCount = (sizePdl.toUpperCase().match(/X/g) || []).length;
+    if (pdlXCount > 1) {
+        pdlDetails.push(`Size ${sizePdl} +${(pdlXCount - 1) * 5}rb`);
+    }
+
+    if (pdlDetails.length > 0) {
+        pdlBreakdown += ` (${pdlDetails.join(', ')})`;
+    }
+
+    document.getElementById('biayaPdl').textContent = pdlBreakdown;
 
     document.getElementById('biayaAwal').textContent = peserta['Biaya Awal'];
     document.getElementById('subsidi').textContent = peserta['Subsidi'];

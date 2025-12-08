@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cek Biaya Kaos & PDL Cakra Yudha</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>🎽 Cek Biaya Kaos & PDL Cakra Yudha 🎽</h1>
+        </header>
+
+        <div class="search-section">
+            <h2>🔍 Cari Data Anda</h2>
+            <div class="form-group">
+                <label for="namaInput">Pilih atau Ketik Nama:</label>
+                <input type="text" id="namaInput" class="nama-input" placeholder="Ketik nama untuk mencari...">
+                <div id="namaDropdown" class="nama-dropdown"></div>
+            </div>
+            <div id="loading" class="loading" style="display: none;">
+                Memuat data...
+            </div>
+        </div>
+
+        <div id="detailBox" class="detail-box" style="display: none;">
+            <h2>📋 Detail Biaya</h2>
+            <div class="detail-content">
+                <div class="detail-row">
+                    <span class="label">Nama Lengkap:</span>
+                    <span class="value" id="namaLengkap"></span>
+                </div>
+                <div class="detail-row">
+                    <span class="label">Nama Panggilan (PDL):</span>
+                    <span class="value" id="namaPanggilan"></span>
+                </div>
+                <div class="detail-row">
+                    <span class="label">Status:</span>
+                    <span class="value" id="status"></span>
+                </div>
+                <div class="detail-row">
+                    <span class="label">RT:</span>
+                    <span class="value" id="rt"></span>
+                </div>
+                <div class="detail-divider"></div>
+                <div class="detail-row">
+                    <span class="label">Size Kaos:</span>
+                    <span class="value" id="sizeKaos"></span>
+                </div>
+                <div class="detail-row">
+                    <span class="label">Lengan Kaos:</span>
+                    <span class="value" id="lenganKaos"></span>
+                </div>
+                <div class="detail-row">
+                    <span class="label">Biaya Kaos:</span>
+                    <span class="value highlight" id="biayaKaos"></span>
+                </div>
+                <div class="detail-divider"></div>
+                <div class="detail-row">
+                    <span class="label">Size PDL:</span>
+                    <span class="value" id="sizePdl"></span>
+                </div>
+                <div class="detail-row">
+                    <span class="label">Lengan PDL:</span>
+                    <span class="value" id="lenganPdl"></span>
+                </div>
+                <div class="detail-row">
+                    <span class="label">Biaya PDL:</span>
+                    <span class="value highlight" id="biayaPdl"></span>
+                </div>
+                <div class="detail-divider"></div>
+                <div class="detail-row">
+                    <span class="label">Biaya Awal:</span>
+                    <span class="value total" id="biayaAwal"></span>
+                </div>
+                <div class="detail-row">
+                    <span class="label">Subsidi:</span>
+                    <span class="value subsidi" id="subsidi"></span>
+                </div>
+                <div class="detail-row">
+                    <span class="label">Biaya Setelah Subsidi:</span>
+                    <span class="value total" id="biayaSetelahSubsidi"></span>
+                </div>
+                <div class="detail-divider"></div>
+                <div class="detail-row">
+                    <span class="label">Pembayaran DP:</span>
+                    <span class="value" id="dp"></span>
+                </div>
+                <div class="detail-row">
+                    <span class="label">Kekurangan Setelah DP:</span>
+                    <span class="value" id="kekurangan"></span>
+                </div>
+                <div class="detail-row">
+                    <span class="label">Status Pembayaran:</span>
+                    <span class="value" id="lunas"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <h2>📣 UPDATE INFORMASI KAOS & PDL 📣</h2>
+            <p class="alert">‼ Form sudah ditutup ya teman2.</p>
+
+            <div class="info-section">
+                <h3>VENDOR KAOS</h3>
+                <p>Teman Mas Erix</p>
+            </div>
+
+            <div class="info-section">
+                <h3>DETAIL HARGA</h3>
+                <ul>
+                    <li>Kaos: 65rb (Pendek), 75rb (Panjang)</li>
+                    <li>PDL: 130rb (Pendek), 135rb (Panjang)</li>
+                    <li>Size XL++ (5rb tiap X)</li>
+                </ul>
+            </div>
+
+            <div class="info-section">
+                <h3>Berikut update perhitungan subsidi:</h3>
+
+                <p><strong>📌 Total Peserta: 89 orang</strong></p>
+                <ul>
+                    <li>Pelajar: 34</li>
+                    <li>Pekerja: 55</li>
+                </ul>
+
+                <p><strong>📌 Dana Subsidi Awal: Rp3.345.000</strong></p>
+                <p>Subsidi Pelajar: Rp75.000<br>
+                    Total subsidi pelajar: Rp2.550.000</p>
+                <p>Sisa dana subsidi: Rp795.000</p>
+                <p>Subsidi Pekerja: Rp14.455</p>
+            </div>
+
+            <div class="info-section">
+                <h3>Biaya Setelah Subsidi</h3>
+                <ul>
+                    <li>Pelajar bayar: Rp125.000</li>
+                    <li>Pekerja bayar: Rp185.545 (dibulatkan ke 185rb)</li>
+                </ul>
+            </div>
+
+            <div class="info-section">
+                <h3>Rekap Akhir</h3>
+                <ul>
+                    <li>Total biaya awal: Rp18,080,000</li>
+                    <li>Total pembayaran peserta setelah subsidi: Rp14,705,000</li>
+                    <li>Total subsidi terpakai: Rp3,375,000</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
